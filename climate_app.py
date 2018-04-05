@@ -1,4 +1,7 @@
 # Import Dependencies
+import pandas as pd 
+import numpy as np
+
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -8,7 +11,7 @@ import datetime as dt
 from flask import Flask, jsonify
 
 # Create the connection engine
-engine = create_engine("sqlite:///Instructions/hawaii.sqlite")
+engine = create_engine("sqlite:///hawaii.sqlite")
 conn = engine.connect()
 
 # Use SQLAlchemy `automap_base()` to reflect your tables into classes
@@ -32,7 +35,8 @@ def welcome():
 	return "<center><h2><b>~~~~~~Aloha! Surf's up!(◕▿◕✿)~~~~~~ </b></h2><br/>\
 	<img src='https://media3.giphy.com/media/3oKIPprajCN0pYyhvG/giphy.gif'><br/>\
 	Planning your next trip to beautiful sun-kissed Hawaii? <br/>\
-    Check out her rainfall and weather with our Hawaii API.<p>\
+    Check out her rainfall and weather with our Hawaii API.<br/>\
+    Just copy and paste the routes into the browser after 127.0.0.1:5000<p>\
 	<h3>Available Routes: </h3> <br/>\
 	Weather Stations | /api/v1.0/stations <br/>\
 	Precipitation | /api/v1.0/precipitation <br/>\
