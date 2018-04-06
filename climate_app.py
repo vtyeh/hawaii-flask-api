@@ -135,9 +135,9 @@ def daily_normals(start):
 		(t_date, t_min, t_avg, t_max) = daily_normals
 		norms_dict = {}
 		norms_dict["Date"] = t_date
-		norms_dict["Min Temp"] = t_min
-		norms_dict["Avg Temp"] = t_avg
-		norms_dict["Max Temp"] = t_max
+		norms_dict["Temp Min"] = t_min
+		norms_dict["Temp Avg"] = t_avg
+		norms_dict["Temp Max"] = t_max
 		daily_data.append(norms_dict)
 
 	# Return a json list of daily normals
@@ -165,9 +165,9 @@ def daily_normals2(start,end):
 		(t_date2, t_min2, t_avg2, t_max2) = daily_normals2
 		norms_dict2 = {}
 		norms_dict2["Date"] = t_date2
-		norms_dict2["Min Temp"] = t_min2
-		norms_dict2["Avg Temp"] = t_avg2
-		norms_dict2["Max Temp"] = t_max2
+		norms_dict2["Temp Min"] = t_min2
+		norms_dict2["Temp Avg"] = t_avg2
+		norms_dict2["Temp Max"] = t_max2
 		daily_data2.append(norms_dict2)
 
 	# Return a json list of dialy normals
