@@ -145,7 +145,7 @@ def daily_normals(start):
 
 @app.route("/api/v1.0/<start>/<end>")
 def daily_normals2(start,end):
-	"""Returns a json list of dialy normals within a given range"""
+	"""Returns a json list of daily normals within a given range"""
 	# Convert search terms into datetime objects
 	start_date = dt.datetime.strptime(start, '%Y-%m-%d').date()
 	end_date = dt.datetime.strptime(end, '%Y-%m-%d').date()
