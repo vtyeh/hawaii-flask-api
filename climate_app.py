@@ -32,6 +32,7 @@ app = Flask(__name__)
 @app.route("/api/v1.0/")
 def welcome():
 	"""Returns a welcome page with available API routes"""
+
 	return "<center><h2><b>~~~~~~Aloha! Surf's up!(◕▿◕✿)~~~~~~ </b></h2><br/>\
 	<img src='https://media3.giphy.com/media/3oKIPprajCN0pYyhvG/giphy.gif'><br/>\
 	Planning your next trip to beautiful sun-kissed Hawaii? <br/>\
@@ -48,6 +49,7 @@ def welcome():
 @app.route("/api/v1.0/precipitation")
 def precipitation():
 	"""Returns a json list of stations, precipitation, and dates"""
+
 	# Find most recent date of records
 	date_query = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
 	date_query_results = list(np.ravel(date_query))
@@ -74,6 +76,7 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 def stations():
 	"""Returns a json list of stations and their names"""
+	
 	# Design a query to calculate the total number of stations.
 	stations_query = session.query(Station.station, Station.name).all()
 	
@@ -92,6 +95,7 @@ def stations():
 @app.route("/api/v1.0/tobs")
 def tobs():
 	"""Returns a json list of tobs and which station it was observed by on which date"""
+
 	# Find most recent date of records
 	date_query = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
 	date_query_results = list(np.ravel(date_query))
@@ -118,15 +122,13 @@ def tobs():
 @app.route("/api/v1.0/<start>")
 def daily_normals(start):
 	"""Returns a json list of daily normals when given a start date"""
-	# Convert search term into a datetime object
-	start_date = dt.datetime.strptime(start, '%Y-%m-%d').date()
 
 	# Calculate the daily normals. Normals are the averages for min, avg, and max temperatures.
 	daily_calc = [func.min(Measurement.tobs),\
 					func.avg(Measurement.tobs),\
 					func.max(Measurement.tobs)]
 	daily_query = session.query(Measurement.date,*daily_calc).\
-				filter(func.strftime("%Y-%m-%d", Measurement.date) >= start_date).\
+				filter(func.strftime("%Y-%m-%d", Measurement.date) >= start).\
 				group_by(Measurement.date)	
 
 	# Convert query results into a dictionary
@@ -145,18 +147,15 @@ def daily_normals(start):
 
 @app.route("/api/v1.0/<start>/<end>")
 def daily_normals2(start,end):
-	"""Returns a json list of daily normals within a given range"""
-	# Convert search terms into datetime objects
-	start_date = dt.datetime.strptime(start, '%Y-%m-%d').date()
-	end_date = dt.datetime.strptime(end, '%Y-%m-%d').date()
+	"""Returns a json list of dialy normals within a given range"""
 
 	# Calculate the daily normals. Normals are the averages for min, avg, and max temperatures
 	daily_calc2 = [func.min(Measurement.tobs),\
 					func.avg(Measurement.tobs),\
 					func.max(Measurement.tobs)]
 	daily_query2 = session.query(Measurement.date,*daily_calc2).\
-				filter(func.strftime("%Y-%m-%d", Measurement.date) >= start_date).\
-				filter(func.strftime("%Y-%m-%d", Measurement.date) <= end_date).\
+				filter(func.strftime("%Y-%m-%d", Measurement.date) >= start).\
+				filter(func.strftime("%Y-%m-%d", Measurement.date) <= end).\
 				group_by(Measurement.date)
 
 	# Convert query results into a json dictionary
