@@ -94,8 +94,8 @@ You are now ready to use Python and SQLAlchemy to do basic climate analysis and 
 * The following are optional challenge queries. These are highly recommended to attempt, but not required for the homework.
 
   * Calcualte the rainfall per weather station using the previous year's matching dates.
-
-* Calculate the daily normals. Normals are the averages for min, avg, and max temperatures.
+  
+  * Calculate the daily normals. Normals are the averages for min, avg, and max temperatures.
 
   * Create a function called `daily_normals` that will calculate the daily normals for a specific date. This date string will be in the format `%m-%d`. Be sure to use all historic tobs that match that date string.
 
